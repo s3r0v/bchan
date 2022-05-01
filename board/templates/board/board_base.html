@@ -1,0 +1,11 @@
+{% include 'header.html' %}
+<html>
+	<head>
+		<form action="thread/create_thread/" method="post">
+		    {% csrf_token %}
+		    <label for="content">Comment: </label>
+		    <input id="content" type="text">
+		    <input type="submit" value="OK">
+		</form>
+	</head>
+</html>
