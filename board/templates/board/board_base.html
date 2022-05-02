@@ -3,9 +3,15 @@
 	<head>
 		<form action="thread/create_thread/" method="post">
 		    {% csrf_token %}
-		    <label for="content">Comment: </label>
-		    <input id="content" type="text">
+		    {{ form }}
 		    <input type="submit" value="OK">
 		</form>
 	</head>
+	<body>
+		{% for thread in threads %}
+		<div>
+			{{ thread.content }}
+		</div>
+		{% endfor %}
+	</body>
 </html>

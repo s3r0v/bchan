@@ -1,4 +1,4 @@
 from django import forms
 
 class ThreadForm(forms.Form):
-    content = forms.CharField(label='Comment: ', max_length=100)
+    content = forms.CharField(label='Comment:', widget=forms.Textarea)

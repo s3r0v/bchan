@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from .models import *
 from .forms import *
@@ -10,9 +10,13 @@ def IndexView(request):
 def BoardView(request, link):
 	board = BoardModel.objects.filter(link=link)[0]
 	thread_form = ThreadForm()
-	return render(request, 'board/board_base.html', {'board':board, 'form':thread_form})
+	threads = ThreadModel.objects.filter(board=board)
+	return render(request, 'board/board_base.html', {'board':board, 'form':thread_form, 'threads':threads})
 
 def CreateThreadView(request):
 	form = ThreadForm(request.POST)
-	print(form.content)
-	return HttpResponse(content)
+	if form.is_valid():
+		content = form.cleaned_data['content']
+		new_thread = ThreadModel(content=content, board=BoardModel.objects.filter(link="b")[0])
+		new_thread.save()
+		return redirect("../../b")
